@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jadwal Pelajaran</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background-color: #f2f2f2;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 200px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+    }
+    #jadwal {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Jadwal Pelajaran</h1>
+
+<button onclick="tampil('senin')">Senin</button>
+<button onclick="tampil('selasa')">Selasa</button>
+<button onclick="tampil('rabu')">Rabu</button>
+<button onclick="tampil('kamis')">Kamis</button>
+<button onclick="tampil('jumat')">Jumat</button>
+
+<div id="jadwal"></div>
+
+<script>
+function tampil(hari) {
+  let data = {
+    senin: "Matematika, Bahasa Indonesia, IPA",
+    selasa: "Bahasa Inggris, PJOK, Seni",
+    rabu: "Matematika, IPS, PKN",
+    kamis: "Bahasa Indonesia, IPA, TIK",
+    jumat: "Agama, Olahraga"
+  };
+
+  document.getElementById("jadwal").innerHTML =
+    "<h2>Jadwal " + hari.toUpperCase() + "</h2>" + data[hari];
+}
+</script>
+
+</body>
+</html>
