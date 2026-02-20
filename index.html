@@ -2,57 +2,172 @@
 <html>
 <head>
   <title>Jadwal Pelajaran</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: Arial;
+      margin: 0;
       text-align: center;
-      background-color: #f2f2f2;
+      background: #ecf0f1;
     }
+
     h1 {
-      color: #333;
+      color: white;
+      padding: 15px;
+      margin: 0;
     }
-    button {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      width: 200px;
-      font-size: 16px;
+
+    .container {
+      background: white;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    select, button {
+      margin: 8px;
+      padding: 12px;
+      width: 80%;
       border-radius: 10px;
       border: none;
-      background-color: #4CAF50;
+      font-size: 16px;
+    }
+
+    button {
+      background: #34495e;
       color: white;
     }
-    #jadwal {
-      margin-top: 20px;
-      font-size: 18px;
+
+    .card {
+      background: #f9f9f9;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 10px;
+      text-align: left;
     }
+
+    /* WARNA TIAP KELAS */
+    .X { background: #3498db; }
+    .XI { background: #27ae60; }
+    .XII { background: #e74c3c; }
   </style>
 </head>
 
 <body>
 
-<h1>Jadwal Pelajaran</h1>
+<h1 id="judul">📚 Jadwal Pelajaran </h1>
+<h3> Siswa Siswi SMK Daarul Abroor </h3>
 
-<button onclick="tampil('senin')">Senin</button>
-<button onclick="tampil('selasa')">Selasa</button>
-<button onclick="tampil('rabu')">Rabu</button>
-<button onclick="tampil('kamis')">Kamis</button>
-<button onclick="tampil('jumat')">Jumat</button>
+<div class="container">
 
-<div id="jadwal"></div>
+  <!-- PILIH KELAS -->
+  <select id="kelas" onchange="gantiWarna()">
+    <option value="">-- Pilih Kelas --</option>
+    <option value="X">Kelas X</option>
+    <option value="XI">Kelas XI</option>
+    <option value="XII">Kelas XII</option>
+  </select>
+
+  <!-- HARI -->
+  <button onclick="tampil('senin')">Senin</button>
+  <button onclick="tampil('selasa')">Selasa</button>
+  <button onclick="tampil('rabu')">Rabu</button>
+  <button onclick="tampil('kamis')">Kamis</button>
+  <button onclick="tampil('jumat')">Jumat</button>
+
+  <div id="jadwal"></div>
+
+</div>
 
 <script>
+function gantiWarna() {
+  let kelas = document.getElementById("kelas").value;
+  let judul = document.getElementById("judul");
+
+  judul.className = kelas;
+}
+
 function tampil(hari) {
+  let kelas = document.getElementById("kelas").value;
+
+  if (kelas === "") {
+    alert("Pilih kelas dulu!");
+    return;
+  }
+
   let data = {
-    senin: "Matematika, Bahasa Indonesia, IPA",
-    selasa: "Bahasa Inggris, PJOK, Seni",
-    rabu: "Matematika, IPS, PKN",
-    kamis: "Bahasa Indonesia, IPA, TIK",
-    jumat: "Agama, Olahraga"
+    X: {
+      senin: [
+        "07:00 - 08:00 Matematika - Pak Budi",
+        "08:00 - 09:00 Bahasa Indonesia - Bu Sari",
+        "09:00 - 10:00 IPA - Pak Dedi"
+      ],
+      selasa: [
+        "07:00 - 08:00 Inggris - Bu Lina",
+        "08:00 - 09:00 PJOK - Pak Agus"
+      ],
+      rabu: [
+        "07:00 - 08:00 IPS - Bu Rina",
+        "08:00 - 09:00 PKN - Pak Joko"
+      ],
+      kamis: [
+        "07:00 - 08:00 TIK - Pak Andi",
+        "08:00 - 09:00 IPA - Bu Dewi"
+      ],
+      jumat: [
+        "07:00 - 08:00 Agama - Pak Udin"
+      ]
+    },
+
+    XI: {
+      senin: [
+        "07:00 - 08:00 Fisika - Pak Andi",
+        "08:00 - 09:00 Kimia - Bu Rina"
+      ],
+      selasa: [
+        "07:00 - 08:00 Matematika - Pak Budi",
+        "08:00 - 09:00 Inggris - Bu Lina"
+      ],
+      rabu: [
+        "07:00 - 08:00 Biologi - Bu Dewi"
+      ],
+      kamis: [
+        "07:00 - 08:00 Sejarah - Pak Joko"
+      ],
+      jumat: [
+        "07:00 - 08:00 Agama - Pak Udin"
+      ]
+    },
+
+    XII: {
+      senin: [
+        "07:00 - 08:00 Biologi - Bu Dewi",
+        "08:00 - 09:00 Inggris - Pak Joko"
+      ],
+      selasa: [
+        "07:00 - 08:00 Matematika - Pak Budi"
+      ],
+      rabu: [
+        "07:00 - 08:00 Kimia - Bu Rina"
+      ],
+      kamis: [
+        "07:00 - 08:00 Fisika - Pak Andi"
+      ],
+      jumat: [
+        "07:00 - 08:00 Agama - Pak Udin"
+      ]
+    }
   };
 
-  document.getElementById("jadwal").innerHTML =
-    "<h2>Jadwal " + hari.toUpperCase() + "</h2>" + data[hari];
+  let hasil = `<h2>Kelas ${kelas} - ${hari.toUpperCase()}</h2>`;
+
+  data[kelas][hari].forEach(item => {
+    hasil += `<div class="card">${item}</div>`;
+  });
+
+  document.getElementById("jadwal").innerHTML = hasil;
 }
 </script>
 
