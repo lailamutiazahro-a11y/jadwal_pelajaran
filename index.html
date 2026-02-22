@@ -9,7 +9,8 @@
       font-family: Arial;
       margin: 0;
       text-align: center;
-      background: #ecf0f1;
+      background: linear-gradient(to right, #667eea, #764ba2);
+
     }
 
     h1 {
@@ -56,9 +57,17 @@
 </head>
 
 <body>
-
+<div id="landing">
 <h1 id="judul">📚 Jadwal Pelajaran </h1>
-<h3> Siswa Siswi SMK Daarul Abroor </h3>
+<h3>  Siswa Siswi SMK Daarul Abroor </h3>
+<audio id="KlikSound" src="click.mp3.wav"></audio>
+<button onclick="masukApp()">Masuk</button>
+</div>
+
+<!-- 🔹 HALAMAN UTAMA (DIBUNGKUS DI SINI) -->
+<div id="app" style="display:none;">
+
+<h1 id="judul">📚 Jadwal Pelajaran</h1>
 
 <div class="container">
 
@@ -71,11 +80,14 @@
   </select>
 
   <!-- HARI -->
-  <button onclick="tampil('senin')">Senin</button>
-  <button onclick="tampil('selasa')">Selasa</button>
-  <button onclick="tampil('rabu')">Rabu</button>
-  <button onclick="tampil('kamis')">Kamis</button>
-  <button onclick="tampil('jumat')">Jumat</button>
+  
+  <button onclick="bunyiKlik(); tampil('senin')">Senin</button>
+  <button onclick="bunyiKlik(); tampil('selasa')">Selasa</button>
+  <button onclick="bunyiKlik(); tampil('rabu')">Rabu</button>
+  <button onclick="bunyiKlik(); tampil('kamis')">Kamis</button>
+  <button onclick="bunyiKlik(); tampil('jumat')">Jumat</button>
+
+  <button onclick="keluarApp()">Keluar</button>
 
   <div id="jadwal"></div>
 
@@ -164,10 +176,26 @@ function tampil(hari) {
   let hasil = `<h2>Kelas ${kelas} - ${hari.toUpperCase()}</h2>`;
 
   data[kelas][hari].forEach(item => {
-    hasil += `<div class="card">${item}</div>`;
+    hasil += `<div class="card">⏰ ${item}</div>`;
   });
 
   document.getElementById("jadwal").innerHTML = hasil;
+}
+
+function bunyiKlik() {
+  let sound = document.getElementById("KlikSound");
+  sound.currentTimev= 0;
+  sound.play();
+}
+
+function masukApp() {
+  document.getElementById("landing").style.display = "none";
+  document.getElementById("app").style.display = "block";
+}
+
+function keluarApp() {
+  document.getElementById("app").style.display = "none";
+  document.getElementById("landing").style.display = "block";
 }
 </script>
 
